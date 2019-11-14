@@ -27,6 +27,11 @@ public class UserController {
         usersRepository.save(users);
         return users;
     }
+    @GetMapping(path = "/checkuser", produces = "application/json")
+    public String checkLogin(Principal principal) {
+        System.out.println("Logging in User.. "+principal.getName());
+        return "\"Login Successful\"";
+    }
 
     @GetMapping("/getUsers")
     public List<User> getUsers() {
@@ -42,5 +47,12 @@ public class UserController {
     @GetMapping("/logUser")
     public User logUser(Principal principal) {
         return currentUserService.getUser(principal);
+    }
+
+    @PutMapping("/update")
+    public User update(@Valid @RequestBody User users) {
+        users.setActive(1);
+        usersRepository.save(users);
+        return users;
     }
 }

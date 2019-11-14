@@ -22,8 +22,28 @@ public class User implements Serializable {
     private int active;
     @Column
     private String authorize;
+    @Column
+    private String address;
+    @Column(length = 10)
+    private String phone;
 
     public User() { }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public int getActive() {
         return active;

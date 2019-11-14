@@ -7,9 +7,11 @@ import com.casestudy.blogging.repository.UserRepository;
 import com.casestudy.blogging.repository.UserRepositoryClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -36,6 +38,18 @@ public class CurrentUserService {
         blogs.setUser(user.get());
         blogs.setUsername(principal.getName());
         blogsRepository.save(blogs);
-        return "Post created";
+        return "\"Post created\"";
+    }
+
+    public ArrayList<Blogs> show(Principal principal) {
+        String user = principal.getName();
+        Optional<User> users = usersRepository.findByUsername(user);
+        return blogsRepository.findAllByUser(users);
+    }
+
+    @Transactional
+    public String delete(Long blogId) {
+        blogsRepository.deleteById(blogId);
+        return "\"Blog deleted\"";
     }
 }

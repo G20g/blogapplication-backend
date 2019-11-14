@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,5 +41,20 @@ public class BlogsController {
     @GetMapping("/category/{type}")
     public List<Blogs> getProductByCategory(@PathVariable(value = "type") String productCategory) {
         return blogsRepository.findAllByCategory(productCategory);
+    }
+
+    @GetMapping("searchby/{str}")
+    public List<Blogs> getSearch(@PathVariable(value = "str") String str) {
+        return blogsRepository.findAllByContentContaining(str);
+    }
+
+    @GetMapping(path = "/userBlogs")
+    public ArrayList<Blogs> showBlog(Principal principal) {
+        return currentUserService.show(principal);
+    }
+
+    @GetMapping("/deleteBlog/{blogId}")
+    public String deleteBlog(@PathVariable("blogId") Long id) {
+        return currentUserService.delete(id);
     }
 }
