@@ -57,4 +57,5 @@ public class BlogsController {
     public String deleteBlog(@PathVariable("blogId") Long id) {
         return currentUserService.delete(id);
     }
+
 }

@@ -47,6 +47,7 @@ public class CurrentUserService {
         return blogsRepository.findAllByUser(users);
     }
 
+
     @Transactional
     public String delete(Long blogId) {
         blogsRepository.deleteById(blogId);
