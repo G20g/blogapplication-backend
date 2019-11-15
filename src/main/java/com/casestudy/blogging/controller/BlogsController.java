@@ -31,6 +31,10 @@ public class BlogsController {
     public String addBlog(@Valid @RequestBody Blogs blogs, Principal principal){
         return currentUserService.addPost(blogs,principal);
     }
+    @PostMapping("/updateBlog")
+    public String updateBlog(@Valid @RequestBody Blogs blog, Principal principal) {
+        return currentUserService.addPost(blog, principal);
+    }
 
     @GetMapping("/blogs/{id}")
     public Blogs getBlogById(@PathVariable(value = "id") Long blogid) {

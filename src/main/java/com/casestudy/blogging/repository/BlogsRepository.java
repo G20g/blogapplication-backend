@@ -15,6 +15,7 @@ public interface BlogsRepository extends JpaRepository<Blogs, Long> {
     public List<Blogs>findAllByCategory(String cat);
     public List<Blogs>findAllByContentContaining(String str);
     public ArrayList<Blogs> findAllByUser(Optional<User> users);
+    public List<Blogs>findAllByOrderByUpdatedOnDesc();
 
     public void deleteById(Long id);
 }
